@@ -1,0 +1,24 @@
+ <!DOCTYPE html>
+<html>
+<head>
+	<title>Accueil</title>
+	 <meta charset="UTF-8">
+</head>
+<body ng-app>
+
+	<h1>This is a Heading</h1>
+	<p>This is a paragraph.</p>
+
+	<input type="text" ng-model="search">
+
+	{{search}}
+
+	<div>
+		<ul>
+			<li ng-repeat="film in films">{{film | filter:search}}</li>
+		</ul>
+	</div>
+
+	<script type="text/javascript" src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
+</body>
+</html> 
