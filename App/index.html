@@ -4,21 +4,64 @@
 	<title>Accueil</title>
 	 <meta charset="UTF-8">
 </head>
-<body ng-app>
+<body ng-app="Player">
 
-	<h1>This is a Heading</h1>
-	<p>This is a paragraph.</p>
 
-	<input type="text" ng-model="search">
-
-	{{search}}
-
-	<div>
-		<ul>
-			<li ng-repeat="film in films">{{film | filter:search}}</li>
-		</ul>
+	<div ng-view>
+		
 	</div>
 
+
 	<script type="text/javascript" src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
+
+	<script type="text/javascript" src="https://code.angularjs.org/1.7.8/angular-route.js"></script>
+
+	<script type="text/javascript">
+		var app = angular.module('Player',['ngRoute']);
+		app.config(function($routeProvider){
+			$routeProvider
+				.when('/',{templateUrl : 'Pages/films.html'})
+				.when('/films',{templateUrl : 'Pages/favoris.html'})
+				.otherwise({redirectTo : '/'});
+		})
+
+		app.factory('filmsFactory', function($http, $q){
+			var factory = {
+				
+				films : [],
+				
+				favoris : [],
+
+				getFilms : function(){
+					var promess = $q.defer();
+					$http.get('films.json')
+						.success(function(d, s){
+							factory.films = d; 
+							promess.resolve(factory.films);
+						})
+						.error(function(d, s){
+							promess.reject("Probleme de lecture")
+						});
+					return promess.promise; 
+				},
+
+				getFavoris : function(){
+					return factory.favoris;
+				}
+
+			}
+
+			return factory;
+		})
+
+		app.controller('FilmsCtrl',function($scope, filmsFactory){
+			$scope.films = filmsFactory.getFilms().then(function(films){
+				$scope.films = films;
+			}, function(msg){
+				alert(msg)
+			});
+		});
+
+	</script>
 </body>
 </html> 
