@@ -1,0 +1,121 @@
+ <!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Accueil</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+	<style type="text/css">
+		ol li {
+			cursor: pointer;
+		}
+	</style>
+</head>
+<body ng-app="Player">
+
+
+	<div ng-view style="padding: 50px">
+		
+	</div>
+
+
+	<script src="https://code.jquery.com/jquery-3.4.1.js"
+			  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+			  crossorigin="anonymous"></script>
+
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+	<script type="text/javascript" src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
+
+	<script type="text/javascript" src="https://code.angularjs.org/1.7.8/angular-route.js"></script>
+
+	
+
+	<script type="text/javascript">
+		var app = angular.module('Player',['ngRoute']);
+		app.config(function($routeProvider){
+			$routeProvider
+				.when('/',{templateUrl : 'Pages/films.html'})
+				.when('/favoris',{templateUrl : 'Pages/favoris.html'})
+				.otherwise({redirectTo : '/'});
+		})
+
+		app.factory('filmsFactory', function($http, $q){
+			var factory = {
+				
+				films : [],
+				
+				favoris : [],
+
+				getFilms : function(){
+					var promess = $q.defer();
+					$http.get('films.json')
+					.then(function(d, s){
+							factory.films = d; 
+							promess.resolve(factory.films);
+						}, function(d, s){
+							promess.reject("Probleme de lecture")
+						});
+					return promess.promise; 
+				},
+
+				getFavoris : function(){
+					return factory.favoris;
+				},
+
+				addFilmToFavor : function(film){
+					factory.favoris.push(film);
+					return factory.favoris;
+				},
+
+				removeFilmFromFavo : function(title){
+					for( var i = 0; i < factory.favoris.length; i++){ 
+					   if ( factory.favoris[i].Title === title) {
+					     	factory.favoris.splice(i, 1); 
+					   }
+					}
+				}
+
+			}
+
+			return factory;
+		})
+
+		app.controller('FilmsCtrl',function($scope, filmsFactory){
+			$scope.films = filmsFactory.getFilms().then(function(prom){
+				$scope.films = prom.data;
+			}, function(msg){
+				alert(msg)
+			});
+
+			$scope.addFavor = function(){
+				console.log(filmsFactory.addFilmToFavor(this.film))
+			}
+		});
+
+
+		app.controller('FavorisCtrl', function($scope, filmsFactory){
+			console.log("yeahh")
+			$scope.favoris = filmsFactory.getFavoris();
+
+			$scope.modalShow = function(){
+				var popup = angular.element('#infoFilm');
+				var img = angular.element('#image');
+				var titre = angular.element('#title');
+				var desc = angular.element('#desc');
+				img.attr('src',this.favori.Images[0]);
+				titre.text(this.favori.Title);
+				desc.text("Description : "+this.favori.Plot);
+				popup.modal("show");
+			};
+
+			$scope.removeFav = function(){
+				var titre = angular.element('#title');
+				filmsFactory.removeFilmFromFavo(title.innerText);
+			}
+
+		})
+
+	</script>
+</body>
+</html> 
