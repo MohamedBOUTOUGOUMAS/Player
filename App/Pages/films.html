@@ -1,29 +1,16 @@
- <!DOCTYPE html>
-<html>
-<head>
-<title>Page Title</title>
-</head>
-<body>
-
-<h1>This is a Heading</h1>
-<p>This is a paragraph.</p>
-
 <div ng-controller='FilmsCtrl'>
 	
-	<h1>This is a Heading</h1>
-	<p>This is a paragraph.</p>
+	<h1>Les filmes à voir !</h1>
+	<p>
+		<a href="file:///home/moumouh/T%C3%A9l%C3%A9chargements/Player-master/App/index.html#!/favoris"> Aller vers les favoris </a>
+	</p>
+	
 
-	<input type="text" ng-model="search">
-
-	{{search}}
+	Filtrer les filmes <input type="text" ng-model="search"/>
 
 	<div>
-		<ul>
-			<li ng-repeat="film in films">{{film | filter:search}}</li>
-		</ul>
+		<ol>
+			<li ng-click = "addFavor()" ng-repeat="film in films | filter:search">{{film.Title}}</li>
+		</ol>
 	</div>
 </div>
-
-
-</body>
-</html> 
