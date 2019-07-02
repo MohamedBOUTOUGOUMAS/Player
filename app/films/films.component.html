@@ -1,0 +1,16 @@
+<div style = "margin: 20px">
+	
+	<h1>Les filmes à voir !</h1>
+	<p>
+		<a routerLink="/favoris"> Aller vers les favoris </a>
+	</p>
+	
+
+	Filtrer les filmes <input type="text"/>
+
+	<div>
+		<ul *ngFor="let film of films">
+			<li style="cursor: pointer;" (click) = "addFavor($event)">{{film.Title}}</li>
+		</ul>
+	</div>
+</div>
