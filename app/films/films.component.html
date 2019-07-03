@@ -10,7 +10,7 @@
 
 	<div>
 		<ul *ngFor="let film of films">
-			<li style="cursor: pointer;" (click) = "addFavor($event)">{{film.Title}}</li>
+			<li style="cursor: pointer;" #liFilm (click) = "addFavor(liFilm)">{{film.Title}}</li>
 		</ul>
 	</div>
 </div>

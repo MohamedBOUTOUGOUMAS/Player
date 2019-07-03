@@ -28,10 +28,10 @@ export class FactoryFilmsService {
 		return this.favoris;
 	}
 
-	removeFilmFromFavo (title){
+	removeFilmFromFavo(title){
 		for( var i = 0; i < this.favoris.length; i++){ 
-		   if ( this.favoris[i].Title === title) {
-		     	this.favoris.splice(i, 1); 
+		   if ( this.favoris[i].Title == title) {
+		     	this.favoris.splice(i, 1);
 		   }
 		}
 	}

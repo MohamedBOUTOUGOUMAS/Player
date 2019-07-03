@@ -15,8 +15,9 @@ export class FilmsComponent implements OnInit {
   	this._factoryFilmsService.getFilms().subscribe(data => this.films = data);
   }
 
-  addFavor(event : KeyboardEvent){
-  	var t = (<HTMLInputElement>event.target).value;
+  addFavor(elm : any){
+  	var t = elm.innerText;
+    elm.style="background-color: #e1e1e1";
   	console.log(t);
   	for(var i=0; i<this.films.length; i++){
   		if(this.films[i].Title === t){

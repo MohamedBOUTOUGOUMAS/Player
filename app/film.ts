@@ -19,5 +19,5 @@ export interface IFilm {
 	imdbID : string,
 	Type : string,
 	Response : string,
-	Images : []
+	Images : Array<string>
 }

@@ -1,36 +1,16 @@
 <div style = "margin: 20px">
-
 	<h2>Les Favoris </h2>
 	<a routerLink="/films">Retour à l'accueil</a>
 	<div style="margin-top : 20px">
 		<ul *ngFor = "let favori of favoris">
-			<li style="cursor: pointer;" onclick="document.getElementById('infoFilm').modal('show');" >
+			<li style="display:inline; cursor: pointer;" #fav mat-raised-button (click)="openDialog(favori)" >
 				{{favori.Title}}
 			</li>
+			<button style="display: inline;" (click) = 'removeFav(fav.innerText)'>Supprimer des favoris</button>
 		</ul>
 	</div>
 
-	<div class="modal fade" id="infoFilm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h5 class="modal-title" id="exampleModalLabel">Information de filme</h5>
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          <span aria-hidden="true">&times;</span>
-	        </button>
-	      </div>
-	      <div class="modal-body">
-	        <h2 id = "title"></h2>
-	        <p id = "desc"></p>
-	        <img id = "image" src="" width="100%" />
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-	        <button type="button" class="btn btn-primary" ng-click = "removeFav()">Enlever des favoris</button>
-	      </div>
-	    </div>
-	  </div>
-	</div>
+	
 
 
 </div>
