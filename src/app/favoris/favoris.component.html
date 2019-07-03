@@ -1,0 +1,16 @@
+<div style = "margin: 20px">
+	<h2>Les Favoris </h2>
+	<a routerLink="/films">Retour à l'accueil</a>
+	<div style="margin-top : 20px">
+		<ul *ngFor = "let favori of favoris">
+			<li style="display:inline; cursor: pointer;" #fav mat-raised-button (click)="openDialog(favori)" >
+				{{favori.Title}}
+			</li>
+			<button style="display: inline;" (click) = 'removeFav(fav.innerText)'>Supprimer des favoris</button>
+		</ul>
+	</div>
+
+	
+
+
+</div>
