@@ -16,7 +16,7 @@ export class FilmsComponent implements OnInit {
   }
 
   addFavor(event : KeyboardEvent){
-  	var t = event.originalTarget.innerText;
+  	var t = (<HTMLInputElement>event.target).value;
   	console.log(t);
   	for(var i=0; i<this.films.length; i++){
   		if(this.films[i].Title === t){
