@@ -15,7 +15,7 @@ export class FilmsComponent implements OnInit {
   	this._factoryFilmsService.getFilms().subscribe(data => this.films = data);
   }
 
-  addFavor(event : Event){
+  addFavor(event : KeyboardEvent){
   	var t = event.originalTarget.innerText;
   	console.log(t);
   	for(var i=0; i<this.films.length; i++){
