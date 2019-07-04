@@ -11,7 +11,8 @@
 
 	<div id="listFilms" *ngIf="display" (mouseleave)="hideFilms()">
 		<ul >
-			<li *ngFor="let film of tmpFilms | filtering:search" #liFilm1 (click) = "addFilms(liFilm1)">{{film.Title}}</li>
+			<li *ngFor="let film of tmpFilms | filtering:search" #liFilm1 (click) = "addFilms(liFilm1)">{{film.Title}}
+			</li>
 		</ul>
 	</div>
 	<div *ngIf="nonDisplay">

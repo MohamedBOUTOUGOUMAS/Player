@@ -10,11 +10,13 @@ import { FactoryFilmsService } from '../factory-films.service';
 export class FilmsComponent implements OnInit {
   public display = false;
   public nonDisplay = true;
+
   public tmpFilms : IFilm[];
   public films : IFilm[] = [];
   constructor(private _factoryFilmsService : FactoryFilmsService) { }
 
   ngOnInit() {
+    this.films = this._factoryFilmsService.getFilms();
   	this._factoryFilmsService.getTmpFilms().subscribe(data => this.tmpFilms = data);
   }
 
@@ -29,12 +31,15 @@ export class FilmsComponent implements OnInit {
   }
 
   addFilms(elm : any){
+    this.nonDisplay = true;
+    this.display = false;
     var t = elm.innerText;
     for(var i=0; i<this.tmpFilms.length; i++){
       if(this.tmpFilms[i].Title === t){
-        this.films.push(this.tmpFilms[i]);
+        this._factoryFilmsService.addFilmToFilms(this.tmpFilms[i]);
       }
     }
+    this.films = this._factoryFilmsService.getFilms();
   }
 
   showFilms(){

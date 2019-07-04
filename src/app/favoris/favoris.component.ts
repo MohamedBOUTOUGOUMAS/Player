@@ -23,7 +23,7 @@ export class FavorisComponent implements OnInit {
 
   openDialog(obj : IFilm): void {
     const dialogRef = this.dialog.open(FenetreModalComponent, {
-      height: '1000px',
+      height: '600px',
       width: '500px',
       data: {title: obj.Title, desc: obj.Plot, image: obj.Images[0]}
     });
@@ -37,5 +37,6 @@ export class FavorisComponent implements OnInit {
   removeFav(elm: any){
     var title = elm.innerText;
     this._factoryFilmsService.removeFilmFromFavo(title.substr(0, title.length-1));
+    this._factoryFilmsService.removeFilmFromFilms(title.substr(0, title.length-1));
   }
 }
