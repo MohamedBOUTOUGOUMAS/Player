@@ -6,7 +6,6 @@ import { IFilm } from './film';
 export class FilteringPipe implements PipeTransform {
 
   transform(tab: IFilm[], filter : string): any {
-  console.log(filter)
     if (!tab || !filter) {
             return tab;
         }

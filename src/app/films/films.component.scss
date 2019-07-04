@@ -1,1 +1,12 @@
-/**/
+
+#listFilms{
+	background-color: #e1e1e1
+}
+
+li {
+	cursor: pointer;
+	padding : 5px;
+	&:hover{
+		background-color: white;
+	}
+}

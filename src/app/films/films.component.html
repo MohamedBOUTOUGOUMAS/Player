@@ -1,3 +1,4 @@
+
 <div style = "margin: 20px">
 	
 	<h1>Les filmes à voir !</h1>
@@ -6,11 +7,16 @@
 	</p>
 	
 
-	Filtrer les filmes <input type="text" [(ngModel)]="search"/>
+	Filtrer les filmes <input type="text" [(ngModel)]="search" (focus) = "showFilms()"/>
 
-	<div>
-		<ul *ngFor="let film of films | filtering:search">
-			<li style="cursor: pointer;" #liFilm (click) = "addFavor(liFilm)">{{film.Title}}</li>
+	<div id="listFilms" *ngIf="display" (mouseleave)="hideFilms()">
+		<ul >
+			<li *ngFor="let film of tmpFilms | filtering:search" #liFilm1 (click) = "addFilms(liFilm1)">{{film.Title}}</li>
+		</ul>
+	</div>
+	<div *ngIf="nonDisplay">
+		<ul>
+			<li *ngFor="let f of films" #liFilm2 (click) = "addFavor(liFilm2)">{{f.Title}}</li>
 		</ul>
 	</div>
 </div>

@@ -34,7 +34,8 @@ export class FavorisComponent implements OnInit {
   }
 
 
-  removeFav(title){
-	this._factoryFilmsService.removeFilmFromFavo(title.substr(0, title.length-1));
+  removeFav(elm: any){
+    var title = elm.innerText;
+    this._factoryFilmsService.removeFilmFromFavo(title.substr(0, title.length-1));
   }
 }

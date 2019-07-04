@@ -9,13 +9,11 @@ import { Observable} from 'rxjs/Observable';
 export class FactoryFilmsService {
 
   constructor(private http: HttpClient) {}
- 
-	public films = [];
-				
+ 				
 	public favoris = [];
 
 
-  	getFilms() : Observable<IFilm[]>{
+  	getTmpFilms() : Observable<IFilm[]>{
 		return this.http.get<IFilm[]>("/assets/data/films.json");
 	}
 
@@ -35,6 +33,5 @@ export class FactoryFilmsService {
 		   }
 		}
 	}
-
 
 }
