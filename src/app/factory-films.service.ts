@@ -21,18 +21,50 @@ export class FactoryFilmsService {
 		return this.favoris;
 	}
 
+	getNbFavoris(){
+		return this.favoris.length;
+	}
+
+	isFavori(title) : Boolean{
+		for( var i = 0; i < this.favoris.length; i++){ 
+		   if ( this.favoris[i].Title == title) {
+		   		return true;
+		   }
+		}
+		return false;
+	}
+
 	getFilms(){
 		return this.films;
 	}
 
 	addFilmToFavor (film){
-		this.favoris.push(film);
-		return this.favoris;
+		var b = false;
+		for( var i = 0; i < this.favoris.length; i++){ 
+		   if ( this.favoris[i].Title == film.Title) {
+		   		b = true;
+		   		break;
+		   }
+		}
+		if(b == false){
+			this.favoris.push(film);
+			return this.favoris;
+		}
+		
 	}
 
 	addFilmToFilms(film){
-		this.films.push(film);
-		return this.films;
+		var b = false;
+		for( var i = 0; i < this.films.length; i++){ 
+		   if ( this.films[i].Title == film.Title) {
+		   		b = true;
+		   		break;
+		   }
+		}
+		if(b == false){
+			this.films.push(film);
+			return this.films;
+		}
 	}
 
 	removeFilmFromFavo(title){

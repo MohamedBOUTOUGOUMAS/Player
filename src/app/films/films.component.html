@@ -15,9 +15,10 @@
 			</li>
 		</ul>
 	</div>
-	<div *ngIf="nonDisplay">
+	<div id="listFilms2" *ngIf="nonDisplay">
 		<ul>
-			<li *ngFor="let f of films" #liFilm2 (click) = "addFavor(liFilm2)">{{f.Title}}</li>
+			<li *ngFor="let f of films" #liFilm2 (click) = "addFavor(liFilm2)">{{f.Title}}
+				<button *ngIf="isFavori(f.Title)" style="margin-left: 200px;">Ajouter aux favoris</button></li>
 		</ul>
 	</div>
 </div>
